@@ -23,21 +23,20 @@ public class EmployeeService {
     @Autowired
     EmployeeDetailsRepository employeeDetailsRepository;
     @Autowired
-    EmployeeSalaryRepository employeeSalaryRepo;
+    EmployeeSalaryRepository employeeSalaryRepository;
     @Autowired
-    EmployeeAddressRepository employeeAddressRepo;
+    EmployeeAddressRepository employeeAddressRepository;
     @Autowired
-    EmployeeAttendanceRepository employeeAttendanceRepo;
+    EmployeeAttendanceRepository employeeAttendanceRepository;
 
 
     public EmployeeEntity addEmployee(EmployeeDetails employeeModel){
         EmployeeEntity employeeEntity = new EmployeeEntity(employeeModel.getId(),employeeModel.getName(),
                 employeeModel.getEmail());
-        EmployeeSalaryEntity employeeSalaryEntity = new EmployeeSalaryEntity();
-        employeeSalaryEntity.setSalary(employeeModel.getEmployeeSalaryList().getSalary());
-        employeeSalaryEntity.setPayable(employeeModel.getEmployeeSalaryList().getPayable());
+        EmployeeSalaryEntity employeeSalaryEntity = new EmployeeSalaryEntity(employeeModel.getEmployeeSalaryList().getId(),
+                employeeModel.getEmployeeSalaryList().getSalary(),employeeModel.getEmployeeSalaryList().getPayable());
         employeeSalaryEntity.setEmployeeDetails(employeeEntity);
-        employeeSalaryRepo.save(employeeSalaryEntity);
+        employeeSalaryRepository.save(employeeSalaryEntity);
         employeeEntity.setEmployeeSalary(employeeSalaryEntity);
 
         List<EmployeeAddEntity> employeeAddresses = new ArrayList<>();
@@ -49,7 +48,7 @@ public class EmployeeService {
             employeeAddEntity.setPhoneNumber(employeeAddress.getPhoneNumber());
             employeeAddEntity.setCountry(employeeAddress.getCountry());
             employeeAddEntity.setEmployeeDetails(employeeEntity);
-            employeeAddresses.add(employeeAddressRepo.save(employeeAddEntity));
+            employeeAddresses.add(employeeAddressRepository.save(employeeAddEntity));
         });
         List<EmployeeAttEntity> employeeAttendanceEntities =new ArrayList<>();
         employeeModel.getEmployeeAttendanceList().forEach(employeeAttendance -> {
@@ -58,7 +57,7 @@ public class EmployeeService {
             employeeAttEntity.setHoliday(employeeAttendance.isHoliday());
             employeeAttEntity.setReasonForHoliday(employeeAttendance.getReasonForHoliday());
             employeeAttEntity.setEmployeeDetails(employeeEntity);
-            employeeAttendanceRepo.save(employeeAttEntity);
+            employeeAttendanceRepository.save(employeeAttEntity);
             employeeAttendanceEntities.add(employeeAttEntity);
         });
         employeeEntity.setEmployeeAddressSet(employeeAddresses);
@@ -66,17 +65,17 @@ public class EmployeeService {
       return employeeDetailsRepository.save(employeeEntity);
     }
     public Set<EmployeeDetails> getEmployeeByCountry(String country){
-                List<EmployeeAddEntity> a = employeeAddressRepo.findByCountryIgnoreCase(country);
+                List<EmployeeAddEntity> a = employeeAddressRepository.findByCountryIgnoreCase(country);
       Set<EmployeeEntity> b = a.stream().map(EmployeeAddEntity::getEmployeeDetails).collect(Collectors.toSet());
       return  b.stream().map(this::getEmployeeModel).collect(Collectors.toSet());
     }
     public Set<EmployeeDetails> getEmployeeByCity(String city1, String city2){
-        List<EmployeeAddEntity> a = employeeAddressRepo.findByCityOrCityIgnoreCase(city1,city2);
+        List<EmployeeAddEntity> a = employeeAddressRepository.findByCityOrCityIgnoreCase(city1,city2);
         Set<String> a1 = a.stream().map(EmployeeAddEntity::getEmployeeDetails).map(EmployeeEntity::getEmployeeId).collect(Collectors.toSet());
         return   a1.stream().map(e -> employeeDetailsRepository.findById(e).orElse(null)).map(this::getEmployeeModel).collect(Collectors.toSet());
     }
     public Set<EmployeeDetails> getEmployeeByCityAndCountry(String city, String country){
-        List<EmployeeAddEntity> a = employeeAddressRepo.findByCityAndCountryIgnoreCase(city,country);
+        List<EmployeeAddEntity> a = employeeAddressRepository.findByCityAndCountryIgnoreCase(city,country);
         return   a.stream().map(EmployeeAddEntity::getEmployeeDetails).map(this::getEmployeeModel).collect(Collectors.toSet());
     }
 
@@ -86,13 +85,13 @@ public class EmployeeService {
     }
     public List<EmployeeSalaryDetails> getEmployeeSalaryDetails(String payable){
 
-        List<EmployeeSalaryEntity> sal =employeeSalaryRepo.findByPayableIgnoreCaseContaining(payable);
+        List<EmployeeSalaryEntity> sal = employeeSalaryRepository.findByPayableIgnoreCaseContaining(payable);
         List<EmployeeEntity> emp = sal.stream().map(EmployeeSalaryEntity::getEmployeeDetails).collect(Collectors.toList());
         return emp.stream().map(this::getEmployeeWithSalary).collect(Collectors.toList());
     }
     public List<EmployeeAttendanceSalary> getEmployeeAttend(String date){
 //       List<EmployeeAttendanceEntity> empAtd = employeeAttendanceRepo.findByDateContains(date);
-        List<EmployeeAttEntity> empAtd = employeeAttendanceRepo.findByHolidayTrue();
+        List<EmployeeAttEntity> empAtd = employeeAttendanceRepository.findByHolidayTrue();
         Set<String> e1 = empAtd.stream().map(EmployeeAttEntity::getEmployeeDetails).map(EmployeeEntity::getEmployeeId).collect(Collectors.toSet());
         List<Integer> size = new ArrayList<>();
                 e1.forEach(e2 -> {List<EmployeeAttEntity> e = empAtd.stream().filter(employeeAttEntity -> employeeAttEntity.getDate().endsWith(date)).filter(empAtd1 -> empAtd1.getEmployeeDetails().getEmployeeId().equalsIgnoreCase(e2)).collect(Collectors.toList()); size.add(e.size());});
