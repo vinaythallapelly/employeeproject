@@ -18,11 +18,10 @@ public class EmployeeSalaryEntity {
     public EmployeeSalaryEntity() {
     }
 
-    public EmployeeSalaryEntity(String employeeId, double salary, String payable, EmployeeEntity employeeDetails) {
+    public EmployeeSalaryEntity(String employeeId, double salary, String payable) {
         this.employeeId = employeeId;
         this.salary = salary;
         this.payable = payable;
-        this.employeeDetails = employeeDetails;
     }
 
     public String getEmployeeId() {

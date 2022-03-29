@@ -18,16 +18,22 @@ public class EmployeeController {
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public EmployeeEntity addEmployee(@RequestBody EmployeeDetails employeeModel){ return employeeService.addEmployee(employeeModel);}
-    @RequestMapping(value = "/get/{country}",method = RequestMethod.GET)
-    public Set<EmployeeDetails> getEmployeeByCountry(@PathVariable String country){ return  employeeService.getEmployeeByCountry(country);}
-    @RequestMapping(value = "/get/{country}/{city2}",method = RequestMethod.GET)
-    public Set<EmployeeDetails> getEmployeeByCity(@PathVariable String city1, @PathVariable String city2){ return  employeeService.getEmployeeByCity(city1,city2);}
-    @RequestMapping(value = "/get/{country}/{country}",method = RequestMethod.GET)
+//Task-1
+    @RequestMapping(value = "/getIndia",method = RequestMethod.GET)
+    public Set<EmployeeDetails> getEmployeeByCountry(){ return  employeeService.getEmployeeByCountry();}
+//Task-2
+    @RequestMapping(value = "/get1/{city}/{city1}",method = RequestMethod.GET)
+    public Set<EmployeeDetails> getEmployeeByCity(@PathVariable String city, @PathVariable String city1){ return  employeeService.getEmployeeByCity(city,city1);}
+//Task-3
+    @RequestMapping(value = "/get2/{city}/{country}",method = RequestMethod.GET)
     public Set<EmployeeDetails> getEmployeeByCityAndCountry(@PathVariable String city, @PathVariable String country){ return  employeeService.getEmployeeByCityAndCountry(city,country);}
+//Task-4
     @RequestMapping(value = "/getSalary",method = RequestMethod.GET)
     public List<EmployeeSalaryDetails> getEmployeeSalaryDetails(){ return employeeService.getEmployeeSalaryDetails();}
-    @RequestMapping(value = "/get/{payable}",method = RequestMethod.GET)
+//Task-5
+    @RequestMapping(value = "/get3/{payable}",method = RequestMethod.GET)
     public List<EmployeeSalaryDetails> getEmployeeSalaryDetails(@PathVariable String payable){  return employeeService.getEmployeeSalaryDetails(payable);}
-    @RequestMapping(value = "/get/{date}",method = RequestMethod.GET)
+//Task-6
+    @RequestMapping(value = "/get4/{date}",method = RequestMethod.GET)
     public List<EmployeeAttendanceSalary> getEmployeeAttend(@PathVariable String date){ return employeeService.getEmployeeAttend(date); }
 }
