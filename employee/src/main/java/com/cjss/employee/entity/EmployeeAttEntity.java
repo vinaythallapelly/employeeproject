@@ -5,23 +5,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class EmployeeAttendanceEntity {
+public class EmployeeAttEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String employeeId;
     private String date;
     private boolean holiday;
     private String reasonForHoliday;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    EmployeeDetailsEntity employeeDetails;
+    EmployeeEntity employeeDetails;
 
-    public String getId() {
-        return id;
+    public EmployeeAttEntity() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public EmployeeAttEntity(String employeeId, String date, boolean holiday, String reasonForHoliday) {
+        this.employeeId = employeeId;
+        this.date = date;
+        this.holiday = holiday;
+        this.reasonForHoliday = reasonForHoliday;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getDate() {
@@ -48,11 +58,11 @@ public class EmployeeAttendanceEntity {
         this.reasonForHoliday = reasonForHoliday;
     }
 
-    public EmployeeDetailsEntity getEmployeeDetails() {
+    public EmployeeEntity getEmployeeDetails() {
         return employeeDetails;
     }
 
-    public void setEmployeeDetails(EmployeeDetailsEntity employeeDetails2) {
+    public void setEmployeeDetails(EmployeeEntity employeeDetails2) {
         this.employeeDetails = employeeDetails2;
     }
 

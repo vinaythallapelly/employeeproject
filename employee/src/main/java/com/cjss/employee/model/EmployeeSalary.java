@@ -6,6 +6,15 @@ public class EmployeeSalary {
     private double salary;
     private  String payable;
 
+    public EmployeeSalary() {
+    }
+
+    public EmployeeSalary(String id, double salary, String payable) {
+        this.id = id;
+        this.salary = salary;
+        this.payable = payable;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,6 +1,6 @@
 package com.cjss.employee.controller;
 
-import com.cjss.employee.entity.EmployeeDetailsEntity;
+import com.cjss.employee.entity.EmployeeEntity;
 import com.cjss.employee.model.EmployeeAttendanceSalary;
 import com.cjss.employee.model.EmployeeDetails;
 import com.cjss.employee.model.EmployeeSalaryDetails;
@@ -17,7 +17,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public EmployeeDetailsEntity addEmployee(@RequestBody EmployeeDetails employeeModel){ return employeeService.addEmployee(employeeModel);}
+    public EmployeeEntity addEmployee(@RequestBody EmployeeDetails employeeModel){ return employeeService.addEmployee(employeeModel);}
     @RequestMapping(value = "/get/{country}",method = RequestMethod.GET)
     public Set<EmployeeDetails> getEmployeeByCountry(@PathVariable String country){ return  employeeService.getEmployeeByCountry(country);}
     @RequestMapping(value = "/get/{country}/{city2}",method = RequestMethod.GET)

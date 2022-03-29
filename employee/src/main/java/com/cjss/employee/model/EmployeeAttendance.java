@@ -7,6 +7,16 @@ public class EmployeeAttendance {
     private boolean holiday;
     private String reasonForHoliday;
 
+    public EmployeeAttendance() {
+    }
+
+    public EmployeeAttendance(String id, String date, boolean holiday, String reasonForHoliday) {
+        this.id = id;
+        this.date = date;
+        this.holiday = holiday;
+        this.reasonForHoliday = reasonForHoliday;
+    }
+
     public String getId() {
         return id;
     }

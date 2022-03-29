@@ -15,6 +15,15 @@ public class EmployeeDetails {
     private EmployeeSalary employeeSalaryList;
     private List<EmployeeAttendance> employeeAttendanceList;
 
+    public EmployeeDetails() {
+    }
+
+    public EmployeeDetails(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     public String getId() {
         return id;
     }

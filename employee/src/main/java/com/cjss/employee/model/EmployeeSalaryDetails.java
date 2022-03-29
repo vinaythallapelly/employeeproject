@@ -7,6 +7,10 @@ public class EmployeeSalaryDetails {
     private double salary;
     private  String payable;
 
+
+    public EmployeeSalaryDetails() {
+    }
+
     public EmployeeSalaryDetails(String id, String name, String email, double salary, String payable) {
         this.id = id;
         this.name = name;

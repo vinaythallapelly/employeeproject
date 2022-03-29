@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class EmployeeAddressEntity {
+public class EmployeeAddEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String employeeId;
@@ -16,12 +16,12 @@ public class EmployeeAddressEntity {
     private String country;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    EmployeeDetailsEntity employeeDetails;
+    EmployeeEntity employeeDetails;
 
-    public EmployeeAddressEntity() {
+    public EmployeeAddEntity() {
     }
 
-    public EmployeeAddressEntity(String employeeId, String line1, String line2, String city, String phoneNumber, String country) {
+    public EmployeeAddEntity(String employeeId, String line1, String line2, String city, String phoneNumber, String country) {
         this.employeeId = employeeId;
         this.line1 = line1;
         this.line2 = line2;
@@ -78,11 +78,11 @@ public class EmployeeAddressEntity {
         this.country = country;
     }
 
-    public EmployeeDetailsEntity getEmployeeDetails() {
+    public EmployeeEntity getEmployeeDetails() {
         return employeeDetails;
     }
 
-    public void setEmployeeDetails(EmployeeDetailsEntity employeeDetails1) {
+    public void setEmployeeDetails(EmployeeEntity employeeDetails1) {
         this.employeeDetails = employeeDetails1;
     }
 

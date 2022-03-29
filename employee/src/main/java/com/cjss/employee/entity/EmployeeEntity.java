@@ -4,25 +4,34 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class EmployeeDetailsEntity {
+public class EmployeeEntity {
     @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String employeeId;
     private String name;
     private String email;
     @OneToOne(mappedBy = "employeeDetails")
     EmployeeSalaryEntity employeeSalary;
     @OneToMany(mappedBy = "employeeDetails")
-    List<EmployeeAddressEntity> employeeAddressSet = new ArrayList<>();
+    List<EmployeeAddEntity> employeeAddressSet = new ArrayList<>();
     @OneToMany(mappedBy = "employeeDetails")
-    List<EmployeeAttendanceEntity> employeeAttendanceList = new ArrayList<>();
+    List<EmployeeAttEntity> employeeAttendanceList = new ArrayList<>();
 
-    public String getId() {
-        return id;
+    public EmployeeEntity() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public EmployeeEntity(String employeeId, String name, String email) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.email = email;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {
@@ -49,19 +58,19 @@ public class EmployeeDetailsEntity {
         this.employeeSalary = employeeSalary;
     }
 
-    public List<EmployeeAddressEntity> getEmployeeAddressSet() {
+    public List<EmployeeAddEntity> getEmployeeAddressSet() {
         return employeeAddressSet;
     }
 
-    public void setEmployeeAddressSet(List<EmployeeAddressEntity> employeeAddressSet) {
+    public void setEmployeeAddressSet(List<EmployeeAddEntity> employeeAddressSet) {
         this.employeeAddressSet = employeeAddressSet;
     }
 
-    public List<EmployeeAttendanceEntity> getEmployeeAttendanceList() {
+    public List<EmployeeAttEntity> getEmployeeAttendanceList() {
         return employeeAttendanceList;
     }
 
-    public void setEmployeeAttendanceList(List<EmployeeAttendanceEntity> employeeAttendanceList) {
+    public void setEmployeeAttendanceList(List<EmployeeAttEntity> employeeAttendanceList) {
         this.employeeAttendanceList = employeeAttendanceList;
     }
 

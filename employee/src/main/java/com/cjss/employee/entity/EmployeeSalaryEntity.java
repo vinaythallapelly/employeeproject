@@ -8,29 +8,29 @@ import javax.persistence.*;
 public class EmployeeSalaryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String employeeId;
     private double salary;
     private  String payable;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    private EmployeeDetailsEntity employeeDetails;
+    private EmployeeEntity employeeDetails;
 
     public EmployeeSalaryEntity() {
     }
 
-    public EmployeeSalaryEntity(String id, double salary, String payable, EmployeeDetailsEntity employeeDetails) {
-        this.id = id;
+    public EmployeeSalaryEntity(String employeeId, double salary, String payable, EmployeeEntity employeeDetails) {
+        this.employeeId = employeeId;
         this.salary = salary;
         this.payable = payable;
         this.employeeDetails = employeeDetails;
     }
 
-    public String getId() {
-        return id;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public double getSalary() {
@@ -49,11 +49,11 @@ public class EmployeeSalaryEntity {
         this.payable = payable;
     }
 
-    public EmployeeDetailsEntity getEmployeeDetails() {
+    public EmployeeEntity getEmployeeDetails() {
         return employeeDetails;
     }
 
-    public void setEmployeeDetails(EmployeeDetailsEntity employeeDetails) {
+    public void setEmployeeDetails(EmployeeEntity employeeDetails) {
         this.employeeDetails = employeeDetails;
     }
 

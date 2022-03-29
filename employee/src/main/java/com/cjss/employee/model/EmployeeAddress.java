@@ -8,6 +8,18 @@ public class EmployeeAddress {
     private String phoneNumber;
     private String country;
 
+    public EmployeeAddress() {
+    }
+
+    public EmployeeAddress(String id, String line1, String line2, String city, String phoneNumber, String country) {
+        this.id = id;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+    }
+
     public String getId() {
         return id;
     }

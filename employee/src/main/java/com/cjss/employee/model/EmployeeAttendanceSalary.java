@@ -9,6 +9,9 @@ public class EmployeeAttendanceSalary {
     private  double salary;
     private Integer NoOfDaysOff;
 
+    public EmployeeAttendanceSalary() {
+    }
+
     public EmployeeAttendanceSalary(String id, String name, List<String> phoneNumber, double salary, Integer noOfDaysOff) {
         this.id = id;
         this.name = name;
