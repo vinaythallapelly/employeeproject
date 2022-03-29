@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class EmployeeAddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String employeeId;
     private String line1;
     private String line2;
     private String city;
@@ -18,12 +18,24 @@ public class EmployeeAddressEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     EmployeeDetailsEntity employeeDetails;
 
-    public String getId() {
-        return id;
+    public EmployeeAddressEntity() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public EmployeeAddressEntity(String employeeId, String line1, String line2, String city, String phoneNumber, String country) {
+        this.employeeId = employeeId;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getLine1() {

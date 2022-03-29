@@ -132,7 +132,7 @@ public class EmployeeService {
             EmployeeAddress employeeAddress = new EmployeeAddress();
             employeeAddress.setLine1(employeeAddressEntity.getLine1());
             employeeAddress.setLine2(employeeAddressEntity.getLine2());
-            employeeAddress.setId(employeeAddressEntity.getId());
+            employeeAddress.setId(employeeAddressEntity.getEmployeeId());
             employeeAddress.setCity(employeeAddressEntity.getCity());
             employeeAddress.setCountry(employeeAddressEntity.getCountry());
             employeeAddress.setPhoneNumber(employeeAddressEntity.getPhoneNumber());
