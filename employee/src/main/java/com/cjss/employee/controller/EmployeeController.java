@@ -16,18 +16,18 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping("/add")
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public EmployeeDetailsEntity addEmployee(@RequestBody EmployeeDetails employeeModel){ return employeeService.addEmployee(employeeModel);}
-    @GetMapping("/get/{country}")
+    @RequestMapping(value = "/get/{country}",method = RequestMethod.GET)
     public Set<EmployeeDetails> getEmployeeByCountry(@PathVariable String country){ return  employeeService.getEmployeeByCountry(country);}
-    @GetMapping("/get/{city1}/{city2}")
+    @RequestMapping(value = "/get/{country}/{city2}",method = RequestMethod.GET)
     public Set<EmployeeDetails> getEmployeeByCity(@PathVariable String city1, @PathVariable String city2){ return  employeeService.getEmployeeByCity(city1,city2);}
-    @GetMapping("/get/{city}/{country}")
+    @RequestMapping(value = "/get/{country}/{country}",method = RequestMethod.GET)
     public Set<EmployeeDetails> getEmployeeByCityAndCountry(@PathVariable String city, @PathVariable String country){ return  employeeService.getEmployeeByCityAndCountry(city,country);}
-    @GetMapping("/getSalary")
+    @RequestMapping(value = "/getSalary",method = RequestMethod.GET)
     public List<EmployeeSalaryDetails> getEmployeeSalaryDetails(){ return employeeService.getEmployeeSalaryDetails();}
-    @GetMapping("/get/{payable}")
+    @RequestMapping(value = "/get/{payable}",method = RequestMethod.GET)
     public List<EmployeeSalaryDetails> getEmployeeSalaryDetails(@PathVariable String payable){  return employeeService.getEmployeeSalaryDetails(payable);}
-    @GetMapping("/get/{date}")
+    @RequestMapping(value = "/get/{date}",method = RequestMethod.GET)
     public List<EmployeeAttendanceSalary> getEmployeeAttend(@PathVariable String date){ return employeeService.getEmployeeAttend(date); }
 }
